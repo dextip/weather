@@ -5,21 +5,12 @@ fetch(api)
   .then((response) => response.json())
   .then((data) => makePage(data));
 
-function makePage(data) {
-  setData("day0", dateFormat(data.daily.time[0]));
-  setData("day1", dateFormat(data.daily.time[0]));
-
-  setData("weathercode0", data.daily.weathercode[0]);
-  setData("weathercode1", data.daily.weathercode[1]);
-
-  setData("temperature_2m_max0", data.daily.temperature_2m_max[0] + "℃");
-  setData("temperature_2m_max1", data.daily.temperature_2m_max[1] + "℃");
-
-  setData("temperature_2m_min0", data.daily.temperature_2m_min[0] + "℃");
-  setData("temperature_2m_min1", data.daily.temperature_2m_min[1] + "℃");
-
-  setData("precipitation_sum0", data.daily.precipitation_sum[0] + "mm");
-  setData("precipitation_sum1", data.daily.precipitation_sum[1] + "mm");
+for (let i = 0; i < 3; i++) {
+  setData("day" + i, dateFormat(data.daily.time[i]));
+  setData("weathercode" + i, getWMO(data.daily.weathercode[i]));
+  setData("temperature_2m_max" + i, data.daily.temperature_2m_max[i] + "℃");
+  setData("temperature_2m_min" + i, data.daily.temperature_2m_min[i] + "℃");
+  setData("precipitation_sum" + i, data.daily.precipitation_sum[i] + "mm");
 }
 
 function setData(id, data) {

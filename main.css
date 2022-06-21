@@ -1,8 +1,13 @@
 body {
   text-align: center;
-  font-size: 5vw;
-  height: 100vh;
+  font-size: 3vw;
+  min-height: 100vh;
   margin: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 10vw 0 2vw 0;
 }
 
 table {
