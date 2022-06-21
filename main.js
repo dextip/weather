@@ -5,12 +5,22 @@ fetch(api)
   .then((response) => response.json())
   .then((data) => makePage(data));
 
-for (let i = 0; i < 3; i++) {
-  setData("day" + i, dateFormat(data.daily.time[i]));
-  setData("weathercode" + i, getWMO(data.daily.weathercode[i]));
-  setData("temperature_2m_max" + i, data.daily.temperature_2m_max[i] + "℃");
-  setData("temperature_2m_min" + i, data.daily.temperature_2m_min[i] + "℃");
-  setData("precipitation_sum" + i, data.daily.precipitation_sum[i] + "mm");
+function makePage(data) {
+  for (let i = 0; i < 3; i++) {
+    setData("day" + i, dateFormat(data.daily.time[i]));
+    setData("weathercode" + i, getWMO(data.daily.weathercode[i]));
+    setData("temperature_2m_max" + i, data.daily.temperature_2m_max[i] + "℃");
+    setData("temperature_2m_min" + i, data.daily.temperature_2m_min[i] + "℃");
+    setData("precipitation_sum" + i, data.daily.precipitation_sum[i] + "mm");
+  }
+
+  if (data.daily.precipitation_sum[0] > 0) {
+    document.getElementById("body").style.backgroundImage =
+      "linear-gradient(#ccf 5%, #fff 10%)";
+  } else {
+    document.getElementById("body").style.backgroundImage =
+      "linear-gradient(#fec 5%, #fff 10%)";
+  }
 }
 
 function setData(id, data) {
